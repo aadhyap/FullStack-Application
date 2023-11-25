@@ -2,9 +2,4 @@
 .env.local
 .env.test.local
 .env.production.local
-.eslintcache
-
-#dependencies
-/node_modules
-/.pnp
-.pnp.js
+images-gallery/frontend/node_modules/*
