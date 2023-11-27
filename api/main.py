@@ -2,9 +2,10 @@ import os
 import requests
 from flask import Flask, request
 from dotenv import load_dotenv
+from flask_cors import CORS
 
 load_dotenv(dotenv_path="./.env.local")
-UNSPLASH_URL = "https://api.unsplash.com/photos/random"
+UNSPLASH_URL="https://api.unsplash.com/photos/random"
 UNSPLASH_KEY=os.environ.get("UNSPLASH_KEY","")
 
 if not UNSPLASH_KEY:
@@ -12,6 +13,7 @@ if not UNSPLASH_KEY:
 
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route("/new-image")
 def new_image():
@@ -21,12 +23,13 @@ def new_image():
     "Authorization" : "Client-ID " + UNSPLASH_KEY
   }
   params ={
-    "query ": word
+    "query": word
   }
   response = requests.get(url = UNSPLASH_URL, headers=headers, params=params)
 
   data = response.json()
-  return {"data": data}
+  print(data)
+  return data
     
 
 if __name__ == "__main__":
